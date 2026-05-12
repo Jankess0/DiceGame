@@ -1,0 +1,38 @@
+# Skompilowany kod i buildy
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# JetBrains Rider / ReSharper
+.idea/
+*.sln.iml
+riderModule.iml
+/_ReSharper.Caches/
+*.userprefs
+
+# Visual Studio / VS Code (na wypadek otwarcia w innym IDE)
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Pakiety NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Wyniki testów jednostkowych
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.[Tt]rxc
+*.[Tt]rx
+*.coverage
+
+# Pliki systemowe (Windows / Mac)
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
