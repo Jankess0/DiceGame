@@ -14,6 +14,17 @@ public class GameEngine
         _ui = ui;
         _game = game;
     }
+    
+    public void Run()
+    {
+        while (!CheckGameEnd())
+        {
+            Player currentPlayer = _game.Players[_game.CurrentPlayerIndex];
+            PlayTurn(currentPlayer);
+            NextPlayer();
+        }
+        _ui.ShowScore(_game.Players);
+    }
 
     public void PlayTurn(Player player)
     {
@@ -66,11 +77,16 @@ public class GameEngine
 
     public void NextPlayer()
     {
-        throw new NotImplementedException();
+        _game.CurrentPlayerIndex++;
+        if (_game.CurrentPlayerIndex >= _game.Players.Count)
+        {
+            _game.CurrentPlayerIndex = 0;
+            _game.Round++;
+        }
     }
 
     public bool CheckGameEnd()
     {
-        throw new NotImplementedException();
+        return !_game.Players.Any(p => p.PlayerScoreCard.Rows.Any(row => row.Value == null));
     }
 }
