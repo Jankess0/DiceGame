@@ -9,4 +9,5 @@ public interface IUserInterface
     ScoreRow AskScoreRow(List<ScoreRow> availableRows);
     void ShowScore(List<Player> players);
     void ShowScoreOptions();
+    void ShowTurnStart(string name);
 }
