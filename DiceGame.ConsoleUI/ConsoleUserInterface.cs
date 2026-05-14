@@ -114,7 +114,7 @@ public class ConsoleUserInterface : IUserInterface
 
     public async Task<string> AskPlayerNameAsync(int playerIndex)
     {
-        Console.Write($"Enter Player{playerIndex} name: ");
+        Console.Write($"Enter Player{playerIndex + 1} name: ");
         string? name = await Console.In.ReadLineAsync();
         return string.IsNullOrWhiteSpace(name) ? "Unknown" : name;
     }

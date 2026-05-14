@@ -73,7 +73,8 @@ public class GameEngine
 
         ScoreRow chosenRow = await _ui.AskScoreRowAsync(availableRows);
 
-        int score = Scorer.Calculate(chosenRow, dices);
+        List<int> values = dices.Select(d => d.Value).ToList();
+        int score = Scorer.Calculate(chosenRow, values);
         
         player.PlayerScoreCard.MarkScore(chosenRow, score);
     }

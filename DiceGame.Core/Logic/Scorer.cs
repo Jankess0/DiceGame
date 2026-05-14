@@ -4,9 +4,8 @@ namespace DiceGame.Logic;
 
 public static class Scorer
 {
-    public static int Calculate(ScoreRow row, Dice[] dices)
+    public static int Calculate(ScoreRow row, List<int> values)
     {
-        var values = dices.Select(d => d.Value).ToList();
         var groups = values.GroupBy(v => v).ToList();
 
         return row switch
