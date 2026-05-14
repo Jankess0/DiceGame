@@ -11,5 +11,5 @@ public interface IUserInterface
     Task ShowWinnerAsync(List<Player> players);
     Task ShowScoreCardAsync(Player player);
     Task<int> AskPlayerCountAsync();
-    Task<string> AskPlayerNameAsync();
+    Task<string> AskPlayerNameAsync(int playerIndex);
 }

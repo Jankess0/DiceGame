@@ -10,8 +10,7 @@ List<Player> players = new();
 
 for (int i = 0; i < playerCount; i++)
 {
-    Console.WriteLine($"Player {i + 1}: ");
-    string name = await Console.In.ReadLineAsync();
+    string name = await ui.AskPlayerNameAsync(i);
     players.Add(new Player(name));
 }
 

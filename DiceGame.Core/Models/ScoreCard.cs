@@ -4,7 +4,7 @@ public class ScoreCard
 {
     private bool _bonusAwarded;
     public Dictionary<ScoreRow, int?> Rows { get; set; } = new Dictionary<ScoreRow, int?>();
-    public int TotalScore { get; set; }
+    public int TotalScore { get; private set; }
 
     private int _tableOneTotalScore;
     private readonly int _minValueToGetBonus = 63;

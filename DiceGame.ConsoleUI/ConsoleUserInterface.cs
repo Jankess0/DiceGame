@@ -70,7 +70,7 @@ public class ConsoleUserInterface : IUserInterface
         Console.WriteLine("\n----- Score Board ----");
         foreach (var player in players)
         {
-            Console.WriteLine($"{player.Name}: {player.PlayerScoreCard.TotalScore}");
+            Console.WriteLine($"{player.Name}: {player.TotalScore()}");
         }
         return Task.CompletedTask;
     }
@@ -81,9 +81,9 @@ public class ConsoleUserInterface : IUserInterface
         Console.WriteLine("          End Game        ");
         Console.WriteLine("=============================");
         
-        var sortedPlayers = players.OrderByDescending(p => p.PlayerScoreCard.TotalScore).ToList();
+        var sortedPlayers = players.OrderByDescending(p => p.TotalScore()).ToList();
         
-        Console.WriteLine($"\nWinner: {sortedPlayers.First().Name} with score: {sortedPlayers.First().PlayerScoreCard.TotalScore} points!");
+        Console.WriteLine($"\nWinner: {sortedPlayers.First().Name} with score: {sortedPlayers.First().TotalScore()} points!");
         
         return ShowScore(sortedPlayers);
     }
@@ -112,9 +112,9 @@ public class ConsoleUserInterface : IUserInterface
         }
     }
 
-    public async Task<string> AskPlayerNameAsync()
+    public async Task<string> AskPlayerNameAsync(int playerIndex)
     {
-        Console.Write("Enter player name: ");
+        Console.Write($"Enter Player{playerIndex + 1} name: ");
         string? name = await Console.In.ReadLineAsync();
         return string.IsNullOrWhiteSpace(name) ? "Unknown" : name;
     }
