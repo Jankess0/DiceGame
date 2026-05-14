@@ -8,7 +8,8 @@ public class GameEngine
 {
     private readonly IUserInterface _ui;
     private readonly Game _game;
-
+    
+    private readonly int maxRollsPerTurn = 3;
     public GameEngine(IUserInterface ui, Game game)
     {
         _ui = ui;
@@ -17,29 +18,31 @@ public class GameEngine
     
     public async Task RunAsync()
     {
+        Dice[] dices = new[]
+                {
+                    new Dice(),
+                    new Dice(),
+                    new Dice(),
+                    new Dice(),
+                    new Dice()
+                };
+        
         while (!CheckGameEnd())
         {
             Player currentPlayer = _game.Players[_game.CurrentPlayerIndex];
-            await PlayTurnAsync(currentPlayer);
+            await PlayTurnAsync(currentPlayer, dices);
             NextPlayer();
         }
         await _ui.ShowWinnerAsync(_game.Players);
     }
 
-    public async Task PlayTurnAsync(Player player)
+    public async Task PlayTurnAsync(Player player, Dice[] dices)
     {
+        foreach(var dice in dices) { dice.IsHeld = false; }
+        
         await _ui.ShowScoreCardAsync(player);
         
-        Dice[] dices = new[]
-        {
-            new Dice(),
-            new Dice(),
-            new Dice(),
-            new Dice(),
-            new Dice()
-        };
-
-        for (int rollNumber = 1; rollNumber <= 3; rollNumber++)
+        for (int rollNumber = 1; rollNumber <= maxRollsPerTurn; rollNumber++)
         {
             foreach (Dice dice in dices)
             {
@@ -48,7 +51,7 @@ public class GameEngine
             
             await _ui.ShowDiceAsync(dices);
 
-            if (rollNumber < 3)
+            if (rollNumber < maxRollsPerTurn)
             {
                 bool[] heldDices = await _ui.AskHoldAsync(dices);
                 for (int i = 0; i < dices.Length; i++)
@@ -87,6 +90,6 @@ public class GameEngine
 
     public bool CheckGameEnd()
     {
-        return !_game.Players.Any(p => p.PlayerScoreCard.Rows.Any(row => row.Value == null));
+        return _game.Players.All(p => p.PlayerScoreCard.Rows.All(row => row.Value != null));
     }
 }

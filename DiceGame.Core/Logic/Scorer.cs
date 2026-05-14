@@ -11,12 +11,12 @@ public static class Scorer
 
         return row switch
         {
-            ScoreRow.Ones => values.Where(v => v == 1).Count() * 1,
-            ScoreRow.Twos => values.Where(v => v == 2).Count() * 2,
-            ScoreRow.Threes => values.Where(v => v == 3).Count() * 3,
-            ScoreRow.Fours => values.Where(v => v == 4).Count() * 4,
-            ScoreRow.Fives => values.Where(v => v == 5).Count() * 5,
-            ScoreRow.Sixes => values.Where(v => v == 6).Count() * 6,
+            ScoreRow.Ones => values.Count(v => v == 1) * 1,
+            ScoreRow.Twos => values.Count(v => v == 2) * 2,
+            ScoreRow.Threes => values.Count(v => v == 3) * 3,
+            ScoreRow.Fours => values.Count(v => v == 4) * 4,
+            ScoreRow.Fives => values.Count(v => v == 5) * 5,
+            ScoreRow.Sixes => values.Count(v => v == 6) * 6,
             ScoreRow.ThreeOfAKind => groups.Any(g => g.Count() >= 3) ? values.Sum() : 0,
             ScoreRow.FourOfAKind => groups.Any(g => g.Count() >= 4) ? values.Sum() : 0,
             ScoreRow.Full => groups.Any(g => g.Count() == 2) && groups.Any(g => g.Count() == 3) ? 25 : 0,

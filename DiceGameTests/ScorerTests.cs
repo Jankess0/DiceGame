@@ -23,8 +23,13 @@ public class ScorerTests
     [InlineData(2, 3, 4, 5, 6, 0)]
     public void Calculate_Ones_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.Ones, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -33,8 +38,13 @@ public class ScorerTests
     [InlineData(6, 6, 6, 2, 1, 18)]
     public void Calculate_Sixex_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.Sixes, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -44,8 +54,13 @@ public class ScorerTests
     [InlineData(6, 6, 3, 2, 1, 0)]
     public void Calculate_ThreeOfAKind_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.ThreeOfAKind, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -55,8 +70,13 @@ public class ScorerTests
     [InlineData(6, 6, 6, 6, 1, 25)]
     public void Calculate_FourOfAKind_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.FourOfAKind, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -65,8 +85,13 @@ public class ScorerTests
     [InlineData(4, 4, 4, 2, 1, 0)]
     public void Calculate_Full_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.Full, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -77,8 +102,13 @@ public class ScorerTests
     [InlineData(3, 4, 6, 6, 6, 0)]
     public void Calculate_SmallStraigth_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.SmallStraight, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -88,8 +118,13 @@ public class ScorerTests
     [InlineData(3, 4, 5, 6, 6, 0)]
     public void Calculate_LargeStraigth_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.LargeStraight, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -98,8 +133,13 @@ public class ScorerTests
     [InlineData(5, 5, 5, 5, 6, 0)]
     public void Calculate_King_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.King, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 
@@ -108,8 +148,13 @@ public class ScorerTests
     [InlineData(5, 2, 3, 4, 1, 15)]
     public void Calculate_Chance_ReturnsCorrectScore(int d1, int d2, int d3, int d4, int d5, int excepted)
     {
+        // Arrange
         var dice = CreateDice(d1, d2, d3, d4, d5);
+        
+        // Act
         var result = Scorer.Calculate(ScoreRow.Chance, dice);
+        
+        // Assert
         Assert.Equal(excepted, result);
     }
 }
