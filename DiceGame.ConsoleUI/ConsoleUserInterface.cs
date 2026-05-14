@@ -46,31 +46,76 @@ public class ConsoleUserInterface : IUserInterface
 
     public async Task<ScoreRow> AskScoreRowAsync(List<ScoreRow> availableRows)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("\nChoose which category you want to score:");
+        for (int i = 0; i < availableRows.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {availableRows[i]}");
+        }
+
+        while (true)
+        {
+            Console.WriteLine("Your choice:");
+            string input = await Console.In.ReadLineAsync();
+
+            if (int.TryParse(input, out int choice) && choice >= 1 && choice <= availableRows.Count)
+            {
+                return availableRows[choice - 1];
+            }
+            Console.WriteLine("Invalid choice. Try again.");
+        }
     }
 
     public Task ShowScore(List<Player> players)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("\n----- Score Board ----");
+        foreach (var player in players)
+        {
+            Console.WriteLine($"{player.Name}: {player.PlayerScoreCard.TotalScore}");
+        }
+        return Task.CompletedTask;
     }
 
     public Task ShowWinnerAsync(List<Player> players)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("\n=============================");
+        Console.WriteLine("          End Game        ");
+        Console.WriteLine("=============================");
+        
+        var sortedPlayers = players.OrderByDescending(p => p.PlayerScoreCard.TotalScore).ToList();
+        
+        Console.WriteLine($"\nWinner: {sortedPlayers.First().Name} with score: {sortedPlayers.First().PlayerScoreCard.TotalScore} points!");
+        
+        return ShowScore(sortedPlayers);
     }
 
     public Task ShowScoreCardAsync(Player player)
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine($"\n--- Player: {player.Name} Turn ---");
+        return Task.CompletedTask;
     }
 
-    public Task<int> AskPlayerCountAsync()
+    public async Task<int> AskPlayerCountAsync()
     {
-        throw new NotImplementedException();
+        int minPlayers = 2;
+        int maxPlayers = 4;
+        Console.WriteLine("Welcome to DiceGame!");
+        while (true)
+        {
+            Console.Write("Enter number of players(2-4): ");
+            string? input = await Console.In.ReadLineAsync();
+            if (int.TryParse(input, out int count) && count >= minPlayers && count <= maxPlayers)
+            {
+                return count;
+            }
+            Console.WriteLine("Invalid choice. Try again.");
+        }
     }
 
     public async Task<string> AskPlayerNameAsync()
     {
-        throw new NotImplementedException();
+        Console.Write("Enter player name: ");
+        string? name = await Console.In.ReadLineAsync();
+        return string.IsNullOrWhiteSpace(name) ? "Unknown" : name;
     }
 }
