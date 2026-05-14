@@ -9,7 +9,7 @@ public class GameEngine
     private readonly IUserInterface _ui;
     private readonly Game _game;
     
-    private readonly int maxRollsPerTurn = 3;
+    private readonly int _maxRollsPerTurn = 3;
     public GameEngine(IUserInterface ui, Game game)
     {
         _ui = ui;
@@ -42,7 +42,7 @@ public class GameEngine
         
         await _ui.ShowScoreCardAsync(player);
         
-        for (int rollNumber = 1; rollNumber <= maxRollsPerTurn; rollNumber++)
+        for (int rollNumber = 1; rollNumber <= _maxRollsPerTurn; rollNumber++)
         {
             foreach (Dice dice in dices)
             {
@@ -51,7 +51,7 @@ public class GameEngine
             
             await _ui.ShowDiceAsync(dices);
 
-            if (rollNumber < maxRollsPerTurn)
+            if (rollNumber < _maxRollsPerTurn)
             {
                 bool[] heldDices = await _ui.AskHoldAsync(dices);
                 for (int i = 0; i < dices.Length; i++)
