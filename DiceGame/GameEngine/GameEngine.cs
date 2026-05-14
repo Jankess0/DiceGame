@@ -15,20 +15,20 @@ public class GameEngine
         _game = game;
     }
     
-    public void Run()
+    public async Task RunAsync()
     {
         while (!CheckGameEnd())
         {
             Player currentPlayer = _game.Players[_game.CurrentPlayerIndex];
-            PlayTurn(currentPlayer);
+            await PlayTurnAsync(currentPlayer);
             NextPlayer();
         }
-        _ui.ShowScore(_game.Players);
+        await _ui.ShowWinnerAsync(_game.Players);
     }
 
-    public void PlayTurn(Player player)
+    public async Task PlayTurnAsync(Player player)
     {
-        _ui.ShowTurnStart(player.Name);
+        await _ui.ShowScoreCardAsync(player);
         
         Dice[] dices = new[]
         {
@@ -46,11 +46,11 @@ public class GameEngine
                 dice.Roll();
             }
             
-            _ui.ShowDice(dices);
+            await _ui.ShowDiceAsync(dices);
 
             if (rollNumber < 3)
             {
-                bool[] heldDices = _ui.AskHold();
+                bool[] heldDices = await _ui.AskHoldAsync(dices);
                 for (int i = 0; i < dices.Length; i++)
                 {
                     dices[i].IsHeld = heldDices[i];
@@ -68,7 +68,7 @@ public class GameEngine
             .Select(row => row.Key)
             .ToList();
 
-        ScoreRow chosenRow = _ui.AskScoreRow(availableRows);
+        ScoreRow chosenRow = await _ui.AskScoreRowAsync(availableRows);
 
         int score = Scorer.Calculate(chosenRow, dices);
         

@@ -4,10 +4,12 @@ namespace DiceGame.UI;
 
 public interface IUserInterface
 {
-    void ShowDice(Dice[] dices);
-    bool[] AskHold();
-    ScoreRow AskScoreRow(List<ScoreRow> availableRows);
-    void ShowScore(List<Player> players);
-    void ShowScoreOptions();
-    void ShowTurnStart(string name);
+    Task ShowDiceAsync(Dice[] dices);
+    Task<bool[]> AskHoldAsync(Dice[] currentDices);
+    Task<ScoreRow> AskScoreRowAsync(List<ScoreRow> availableRows);
+    Task ShowScore(List<Player> players);
+    Task ShowWinnerAsync(List<Player> players);
+    Task ShowScoreCardAsync(Player player);
+    Task<int> AskPlayerCountAsync();
+    Task<string> AskPlayerNameAsync();
 }

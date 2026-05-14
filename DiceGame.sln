@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceGame", "DiceGame\DiceGame.csproj", "{D6E47EB5-2DF2-44A1-B8B6-CB5D5507D152}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceGameTests", "DiceGameTests\DiceGameTests.csproj", "{2FFCE78C-0F11-4E98-BBA1-6265BD015415}"
