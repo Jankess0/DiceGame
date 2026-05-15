@@ -36,9 +36,15 @@ public class GameEngine
 
     private async Task PlayTurnAsync(Player player, Dice[] dices)
     {
-        foreach(var dice in dices) { dice.IsHeld = false; }
-        
         await _ui.ShowScoreCardAsync(player);
+        
+        await RollPhase(dices);
+        await ScoringPhase(dices, player);
+    }
+
+    private async Task RollPhase(Dice[] dices)
+    {
+        foreach(var dice in dices) { dice.IsHeld = false; }
         
         for (int rollNumber = 1; rollNumber <= _maxRollsPerTurn; rollNumber++)
         {
@@ -57,13 +63,16 @@ public class GameEngine
                     dices[i].IsHeld = heldDices[i];
                 }
 
-                if (heldDices.All(h => h == true))
+                if (heldDices.All(h => h))
                 {
                     break;
                 }
             }
         }
+    }
 
+    private async Task ScoringPhase(Dice[] dices, Player player)
+    {
         var availableRows = player.PlayerScoreCard.Rows
             .Where(row => row.Value == null)
             .Select(row => row.Key)
@@ -76,5 +85,4 @@ public class GameEngine
         
         player.PlayerScoreCard.MarkScore(chosenRow, score);
     }
-    
 }
