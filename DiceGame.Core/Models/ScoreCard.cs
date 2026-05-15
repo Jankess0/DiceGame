@@ -28,7 +28,7 @@ public class ScoreCard
         Rows[row] = score;
         TotalScore += score;
         
-        if (row < ScoreRow.ThreeOfAKind)
+        if (row.GetSection() == ScoreSection.Upper)
         {
             _tableOneTotalScore += score;
         
