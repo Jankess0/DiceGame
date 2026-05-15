@@ -4,7 +4,7 @@ namespace DiceGame.GameEngine;
 
 public class Game
 {
-    public List<Player> Players { get; set; }
+    public List<Player> Players { get; }
     public int Round { get; set; }
     public int CurrentPlayerIndex { get; set; }
 

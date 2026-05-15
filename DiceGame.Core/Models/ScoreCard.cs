@@ -3,7 +3,7 @@ namespace DiceGame.Models;
 public class ScoreCard
 {
     private bool _bonusAwarded;
-    public Dictionary<ScoreRow, int?> Rows { get; set; } = new Dictionary<ScoreRow, int?>();
+    public Dictionary<ScoreRow, int?> Rows { get; } = new Dictionary<ScoreRow, int?>();
     public int TotalScore { get; private set; }
 
     private int _tableOneTotalScore;
