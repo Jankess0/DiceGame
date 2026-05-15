@@ -8,7 +8,6 @@ public class GameEngine
 {
     private readonly IUserInterface _ui;
     private readonly Game _game;
-    
     private readonly int _maxRollsPerTurn = 3;
     public GameEngine(IUserInterface ui, Game game)
     {
@@ -27,16 +26,15 @@ public class GameEngine
                     new Dice()
                 };
         
-        while (!CheckGameEnd())
+        while (!_game.IsGameOver())
         {
-            Player currentPlayer = _game.Players[_game.CurrentPlayerIndex];
-            await PlayTurnAsync(currentPlayer, dices);
-            NextPlayer();
+            await PlayTurnAsync(_game.CurrentPlayer, dices);
+            _game.NextPlayer();
         }
         await _ui.ShowWinnerAsync(_game.Players);
     }
 
-    public async Task PlayTurnAsync(Player player, Dice[] dices)
+    private async Task PlayTurnAsync(Player player, Dice[] dices)
     {
         foreach(var dice in dices) { dice.IsHeld = false; }
         
@@ -78,19 +76,5 @@ public class GameEngine
         
         player.PlayerScoreCard.MarkScore(chosenRow, score);
     }
-
-    public void NextPlayer()
-    {
-        _game.CurrentPlayerIndex++;
-        if (_game.CurrentPlayerIndex >= _game.Players.Count)
-        {
-            _game.CurrentPlayerIndex = 0;
-            _game.Round++;
-        }
-    }
-
-    public bool CheckGameEnd()
-    {
-        return _game.Players.All(p => p.PlayerScoreCard.Rows.All(row => row.Value != null));
-    }
+    
 }
