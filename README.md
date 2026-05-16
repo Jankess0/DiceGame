@@ -16,7 +16,7 @@ Konsolowa implementacja gry w kości dla 2–4 graczy. Napisana w C# (.NET 8) z 
  
 ```bash
 # Klonowanie repozytorium
-git clone <https://github.com/Jankess0/DiceGame>
+git clone https://github.com/Jankess0/DiceGame
 cd DiceGame
  
 # Uruchomienie gry
