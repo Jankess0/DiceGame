@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DiceGame\DiceGame.csproj" />
       <ProjectReference Include="..\DiceGame.Core\DiceGame.Core.csproj" />
     </ItemGroup>
 
