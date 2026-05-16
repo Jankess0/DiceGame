@@ -2,8 +2,8 @@ namespace DiceGame.Models;
 
 public class Player
 {
-    public string Name { get; set; }
-    public ScoreCard PlayerScoreCard { get; set; }
+    public string Name { get; }
+    public ScoreCard PlayerScoreCard { get; }
 
     public Player(string name)
     {
